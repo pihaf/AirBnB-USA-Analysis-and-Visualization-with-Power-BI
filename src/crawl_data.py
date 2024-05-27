@@ -35,7 +35,7 @@ for h3, table in zip(h3_tags, tables):
         downloaded_file = a.text
         file_name = ''
         if downloaded_file == 'listings.csv':
-            file_name = 'listings_summary.csv'
+            file_name = 'listings.csv'
         elif downloaded_file == 'listings.csv.gz':
             file_name = 'listings_full.csv'
         elif downloaded_file == 'reviews.csv':

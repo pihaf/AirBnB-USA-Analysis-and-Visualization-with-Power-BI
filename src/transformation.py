@@ -36,7 +36,7 @@ def merge_listings_of_each_state(state_folder):
 
     merge_df(input_file1, input_file2, output_file, state_name)
 
-def merge_all_states_files_into_final(data_folder, file_name):
+def merge_all_states_files_into_final(data_folder, file_name, final_file_name):
     merged_files = [] 
     
     for name in os.listdir(data_folder):
@@ -48,11 +48,11 @@ def merge_all_states_files_into_final(data_folder, file_name):
     merged_df = pd.concat([pd.read_csv(file) for file in merged_files], ignore_index=True)
     
     # Save the merged DataFrame to a single CSV file
-    output_file = os.path.join(data_folder, 'all_states_listings.csv')
+    output_file = os.path.join(data_folder, final_file_name)
     merged_df.to_csv(output_file, index=False)
     print("All states merged data saved to:", output_file)
 
-def merge_all_neighbourhoods(data_folder):
+def merge_all_neighbourhoods(data_folder, final_file_name):
     merged_files = [] 
     
     for name in os.listdir(data_folder):
@@ -68,7 +68,7 @@ def merge_all_neighbourhoods(data_folder):
     merged_df = pd.concat(merged_files, ignore_index=True)
     
     # Save the merged DataFrame to a single CSV file
-    output_file = os.path.join(data_folder, 'all_states_merged_neighbourhoods.csv')
+    output_file = os.path.join(data_folder, final_file_name)
     merged_df.to_csv(output_file, index=False)
     print("All states merged data saved to:", output_file)
 
@@ -82,5 +82,6 @@ for name in os.listdir(data_folder):
     if os.path.isdir(folder):
         merge_listings_of_each_state(folder)    
 
-merge_all_states_files_into_final(data_folder, 'merged_listings.csv')
-merge_all_neighbourhoods(data_folder)
+merge_all_states_files_into_final(data_folder, 'reviews.csv', 'all_states_reviews.csv')
+merge_all_states_files_into_final(data_folder, 'merged_listings.csv', 'all_states_listings.csv')
+merge_all_neighbourhoods(data_folder, 'all_states_neighbourhoods.csv')
